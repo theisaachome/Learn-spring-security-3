@@ -79,15 +79,15 @@ public class SecurityConfig {
         RegisteredClient registeredClient = RegisteredClient
                 .withId(UUID.randomUUID().toString())
                 .clientId("client")
-                .clientSecret("secrete")
-                .clientAuthenticationMethod(
-                        ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
-//                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-                .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-//                .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-//                .redirectUri("https://www.manning.com/authorized")
-//                .scope(OidcScopes.OPENID)
-                .scope("CUSTOM")
+                .clientSecret("secret")
+                .scope(OidcScopes.OPENID)
+                .scope(OidcScopes.PROFILE)
+                .redirectUri("https://springone.io/authorized")
+                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+//                .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+                .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+//                .scope("CUSTOM")
                 .build();
         return new InMemoryRegisteredClientRepository(registeredClient);
 
