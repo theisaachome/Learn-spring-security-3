@@ -21,15 +21,25 @@ public class SecurityConfig {
         http.httpBasic(Customizer.withDefaults());
 //        http.authorizeHttpRequests((auth)->auth.anyRequest().authenticated());
 
-        http.authorizeHttpRequests((auth)->
-                auth.requestMatchers("/demo/admin")
-                        .hasRole("ADMIN")
-                        );
-        http.authorizeHttpRequests(
-                (auth)->
-                 auth.requestMatchers("/demo/manager")
-                .hasAuthority("read")
-                .anyRequest().permitAll());
+//        http.authorizeHttpRequests((auth)->
+//                auth.requestMatchers("/demo/admin")
+//                        .hasRole("ADMIN")
+//                        .hasAnyRole("ADMIN", "USER")
+//                        );
+//        http.authorizeHttpRequests(
+//                (auth)->
+//                 auth.requestMatchers("/demo/manager")
+//                .hasAuthority("read")
+//                         .hasAnyAuthority("read","write")
+//                .anyRequest().permitAll());
+
+//        http.authorizeHttpRequests((auth)->auth.anyRequest().denyAll());
+//            http.authorizeHttpRequests(
+//                    (authorizeRequests) ->
+//                            authorizeRequests.anyRequest()
+//                                    .permitAll());
+
+//        http.authorizeHttpRequests((auth)->auth.requestMatchers("/demo/**").authenticated());
 
         http.authorizeHttpRequests((rq)->rq.anyRequest().authenticated());
         return  http.build();
