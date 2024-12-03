@@ -41,26 +41,19 @@ public class SecurityConfig {
 
 //        http.authorizeHttpRequests((auth)->auth.requestMatchers("/demo/**").authenticated());
 
-        http.authorizeHttpRequests((rq)->rq.anyRequest().authenticated());
+//        http.authorizeHttpRequests(
+//                (rq)->rq.anyRequest()
+//                        .hasAuthority("WRITE"));
+//        http.authorizeHttpRequests((authorizeRequests) -> {
+//            authorizeRequests.anyRequest()
+//                    .hasAnyAuthority("WRITE","READ");
+//        });
+
+        http.authorizeHttpRequests((authorizeRequests) -> {
+            authorizeRequests.anyRequest().hasAnyRole("WRITE","READ");
+        });
         return  http.build();
     }
 
-    @Bean
-    public UserDetailsService userDetailsService(){
-        var uds = new InMemoryUserDetailsManager();
-        var one = User.withUsername("one")
-                        .password(passwordEncoder().encode("pw"))
-                                .roles("ADMIN").build();
-        var two = User.withUsername("two")
-                        .password(passwordEncoder().encode("pw"))
-                                .roles("MANAGER").build();
-        uds.createUser(one);
-        uds.createUser(two);
-        return uds;
-    }
 
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
 }
